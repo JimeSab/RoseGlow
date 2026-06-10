@@ -165,3 +165,70 @@ footer iframe {
     border: none;
     border-radius: 10px;
 }
+
+/*======================
+Servicios
+======================*/
+.events-section {
+    background-color: #FCF8F8;
+    padding-top: 40px;
+    padding-bottom: 80px;
+}
+
+.servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.servicios-card {
+    background-color: #FBEFEF;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid #F9DFDF;
+    box-shadow: 0 8px 20px rgba(245, 175, 175, 0.35);
+}
+
+.servicios-card figure {
+    margin: 0;
+}
+
+.servicios-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+}
+
+.servicios-card figcaption {
+    padding: 15px;
+    background-color: #FCF8F8;
+    color: #5c3b3b;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.servicios-card-content {
+    padding: 20px;
+}
+
+.servicios-card-content h3 {
+    margin-top: 0;
+    color: #8a4a4a;
+}
+
+.servicios-category {
+    display: inline-block;
+    background-color: #F9DFDF;
+    color: #7a3d3d;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .servicios-grid {
+        grid-template-columns: 1fr;
+    }
+}
