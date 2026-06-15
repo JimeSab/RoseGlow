@@ -17,6 +17,15 @@ body {
     background-color: #fcf8f8;
     color: #000;
     line-height: 1.6;
+
+    /* Espacio para que el header fixed no tape el contenido */
+    padding-top: 88px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 /* =========================
@@ -24,9 +33,8 @@ Utilidades generales
 ========================= */
 
 .container {
-    width: 90%;
+    width: min(90%, 1100px);
     margin: 0 auto;
-    display: block;
 }
 
 /* =========================
@@ -36,6 +44,13 @@ Header
 .site-header{
     background-color: #f5afaf;
     padding: 3px 0;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    z-index: 1000;
 }
 
 .header-content{
@@ -50,6 +65,28 @@ Header
     height: auto;
 }
 
+/*  Checkbox oculto usado para abrir/cerrar menú */
+.menu-toggle {
+    display: none;
+}
+
+/*  Botón hamburguesa oculto en escritorio */
+.menu-button {
+    display: none;
+    width: 38px;
+    height: 32px;
+    cursor: pointer;
+}
+
+/*  Líneas del botón hamburguesa */
+.menu-button span {
+    display: block;
+    height: 4px;
+    margin-bottom: 6px;
+    background-color: black;
+    border-radius: 4px;
+}
+
 /* =========================
 Navegación
 ========================= */
@@ -61,7 +98,7 @@ Navegación
 }
 
 .main-nav li {
-    padding: 0 40px;
+    padding: 0 20px;
 }
 
 .main-nav a {
@@ -71,6 +108,7 @@ Navegación
     padding: 8px 10px;
     border-radius: 6px;
     display: inline-block;
+    transition: 0.3s; /* Cambio de color mas suave */
 }
 
 .main-nav a:hover {
@@ -134,6 +172,13 @@ Boton Agendar
     border-radius: 25px;
     font-size: 1.2rem;
     text-decoration: none;
+    transition: 0.3s; /* Cambio de color mas suave */
+
+    /* Se centra el texto del boton cuando se hace mas pequeña la pantalla*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .btn-agendar:hover {
@@ -227,8 +272,175 @@ Servicios
     font-weight: bold;
 }
 
-@media (max-width: 768px) {
+/* =========================
+Filtros y busqueda
+========================= */
+
+.filtros {
+    display: flex;
+    gap: 15px;
+    margin: 25px 0;
+    flex-wrap: wrap;
+}
+
+.filtros select,
+.filtros input {
+    padding: 12px 16px;
+    border: 2px solid #f9dfdf;
+    border-radius: 12px;
+    background-color: #fbefef;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+.filtros select {
+    min-width: 180px;
+}
+
+.filtros input {
+    width: 250px;
+}
+
+.filtros select:focus,
+.filtros input:focus {
+    border-color: #f5afaf;
+    box-shadow: 0 0 10px rgba(245, 175, 175, 0.4);
+}
+
+.filtros select:hover,
+.filtros input:hover {
+    background-color: #fff5f5;
+}
+
+/* =========================
+MEDIA QUERY TABLET
+========================= */
+
+/*  Ajustes para pantallas medianas */
+@media (max-width: 900px) {
+    body {
+        padding-top: 86px;
+    }
+
+    /*  Hero pasa de dos columnas a una columna */
+    .hero-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero-text,
+    .hero-image {
+        width: 100%;
+    }
+
+    /*  Menú todavía visible, pero con menos separación */
+    .main-nav ul {
+        gap: 6px;
+    }
+
+    .main-nav a {
+        font-size: 0.9rem;
+        padding: 7px 8px;
+    }
+}
+
+/* =========================
+MEDIA QUERY MÓVIL
+========================= */
+
+/*  Ajustes para pantallas pequeñas */
+@media (max-width: 700px) {
+    body {
+        padding-top: 78px;
+    }
+
+    .site-header {
+        padding: 14px 0;
+    }
+
+    .header-content {
+        min-height: 70px;
+        position: relative;
+        gap: 10px;
+    }
+
+    /*  Muestra el botón hamburguesa */
+    .menu-button {
+        display: block;
+    }
+
+    /*  Menú oculto inicialmente */
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 52px;
+        left: 0;
+        width: 100%;
+
+        background-color: #f5afaf;
+        border-top: 1px solid #f9dfdf;
+        padding: 14px;
+        border-radius: 0 0 12px 12px;
+
+        z-index: 999;
+    }
+
+    /*  Cuando el checkbox está activo, se muestra el menú */
+    .menu-toggle:checked~.main-nav {
+        display: block;
+    }
+
+    /*  Menú vertical en móvil */
+    .main-nav ul {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .main-nav a {
+        display: block;
+        padding: 12px;
+        background-color: #fbefef;
+        color: black;
+        border-radius: 8px;
+    }
+
+    .main-nav a:hover {
+        background-color: #f9dfdf;
+        color: black;
+    }
+
+    .hero {
+        padding: 48px 0;
+    }
+
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+
     .servicios-grid {
         grid-template-columns: 1fr;
+    }
+
+    .btn-agendar {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+}
+
+/* =========================
+MEDIA QUERY MÓVIL PEQUEÑO
+========================= */
+
+/*  Ajustes para teléfonos angostos */
+@media (max-width: 420px) {
+    .logo {
+        width: 120px;
+    }
+
+    .hero-text h1 {
+        font-size: 1.75rem;
     }
 }

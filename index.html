@@ -4,16 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS externo principal del sitio -->
     <link rel="stylesheet" href="css/styles.css">
     <title>Rose Glow | Haz florecer tu estilo</title>
 </head>
 
 <body>
+    <!-- Encabezado principal fijo del sitio -->
     <header class="site-header">
         <div class="container header-content">
             <div class="logo-container">
                 <img src="images/logo horizontal.png" alt="Logo Rose Glow" class="logo">
             </div>
+
+            <!-- *** Checkbox oculto para controlar el menú hamburguesa sin JavaScript -->
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+            <!-- *** Botón visual del menú hamburguesa -->
+            <label for="menu-toggle" class="menu-button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <!-- Navegación principal -->
             <nav class="main-nav">
                 <ul>
                     <li><a href="index.html">Inicio</a></li>
@@ -44,108 +57,30 @@
 
         <hr>
 
-        <section id="servicios">
     <section id="servicios" class="events-section">
     <div class="container">
         <h2>Nuestros Servicios</h2>
 
-        <p>Próximamente aquí se mostrarán los servicios cargados desde el JSON.</p>
+        <div class="filtros">
+            <select id="filtroCategoria">
+                <option value="Todos">Todos</option>
+                <option value="Manicure">Manicure</option>
+                <option value="Pedicure">Pedicure</option>
+                <option value="Esmaltado">Esmaltado</option>
+            </select>
 
-        <div class="servicios-grid">
+            <input type="text" id="busquedaServicio" placeholder="Digite una palabra">
+        </div>
 
-            <article class="servicios-card">
-                <figure>
-                    <img src="images/esmalte normal.jpg" alt="Esmalte normal">
-                    <figcaption>
-                        Esmaltado regular. Perfecto para cuando tienes prisa pero quieres que tus uñas estén arregladas.
-                    </figcaption>
-                </figure>
-
-                <div class="servicios-card-content">
-                    <h3>Esmalte normal</h3>
-                    <span class="servicios-category">Precio: 7,500 ₡</span>
-                </div>
-            </article>
-
-            <article class="servicios-card">
-                <figure>
-                    <img src="images/esmaltado semi.jpg" alt="Esmaltado semi permanente">
-                    <figcaption>
-                        Esmaltado semi permanente. Un acabado elegante y duradero.
-                    </figcaption>
-                </figure>
-
-                <div class="servicios-card-content">
-                    <h3>Esmaltado semi permanente</h3>
-                    <span class="servicios-category">Precio: 12,000 ₡</span>
-                </div>
-            </article>
-
-            <article class="servicios-card">
-                <figure>
-                    <img src="images/manicure normal.jpg" alt="Manicure normal">
-                    <figcaption>
-                        El manicure normal deja tus uñas y manos en perfecto estado para un acabado más elegante.
-                        Incluye esmaltado regular.
-                    </figcaption>
-                </figure>
-
-                <div class="servicios-card-content">
-                    <h3>Manicure normal</h3>
-                    <span class="servicios-category">Precio: 12,500 ₡</span>
-                </div>
-            </article>
-
-            <article class="servicios-card">
-                <figure>
-                    <img src="images/Manicure SPA.jpg" alt="Manicure spa">
-                    <figcaption>
-                        El manicure spa te permite relajarte con un masaje y una exfoliación, dejando tus uñas en perfecto estado.
-                        Incluye esmaltado semipermanente.
-                    </figcaption>
-                </figure>
-
-                <div class="servicios-card-content">
-                    <h3>Manicure SPA</h3>
-                    <span class="servicios-category">Precio: 13,500 ₡</span>
-                </div>
-            </article>
-
-            <article class="servicios-card">
-                <figure>
-                    <img src="images/Pedi normal.jpg" alt="Pedicure normal">
-                    <figcaption>
-                        El pedicure deja tus pies arreglados con un acabado distinto.
-                    </figcaption>
-                </figure>
-
-                <div class="servicios-card-content">
-                    <h3>Pedicure normal</h3>
-                    <span class="servicios-category">Precio: 12,500 ₡</span>
-                </div>
-            </article>
-
-            <article class="servicios-card">
-                <figure>
-                    <img src="images/pedi spa.jpg" alt="Pedicure spa">
-                    <figcaption>
-                        Relájate con un masaje y tina caliente para que tus pies queden con un acabado perfecto.
-                        Incluye esmaltado semi permanente.
-                    </figcaption>
-                </figure>
-
-                <div class="servicios-card-content">
-                    <h3>Pedicure SPA</h3>
-                    <span class="servicios-category">Precio: 13,500 ₡</span>
-                </div>
-            </article>
+        <div class="servicios-grid" id="serviciosGrid">
 
         </div>
     </div>
 </section>
-</section>
+
     </main>
 
+    <!-- Pie de página -->
     <footer id="contacto">
         <div class="footer-container">
             <div class="footer-info">
@@ -168,6 +103,7 @@
             <small>&copy; 2026 Rose Glow. Todos los derechos reservados.</small>
         </p>
     </footer>
+    <script src="js/servicios.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "nombre": "Esmaltado Regular",
+        "descripcion": "Perfecto para cuando tienes prisa pero quieres que tus uñas estén arregladas.",
+        "precio": 7500,
+        "categoria": "Esmaltado",
+        "imagen": "images/esmalte normal.jpg"
+    },
+    {
+        "id": 2,
+        "nombre": "Esmaltado Semi Permanente",
+        "descripcion": "Disfruta de un acabado elegante y duradero.",
+        "precio": 12000,
+        "categoria": "Esmaltado",
+        "imagen": "images/esmaltado semi.jpg"
+    },
+    {
+        "id": 3,
+        "nombre": "Manicure Normal",
+        "descripcion": "Deja tus uñas y manos en perfecto estado para un acabado más elegante. Incluye esmaltado regular.",
+        "precio": 12500,
+        "categoria": "Manicure",
+        "imagen": "images/manicure normal.jpg"
+    },
+    {
+        "id": 4,
+        "nombre": "Manicure SPA",
+        "descripcion": "Relájate con un masaje y una exfoliación, dejando tus uñas en perfecto estado. Incluye esmaltado semipermanente.",
+        "precio": 13500,
+        "categoria": "Manicure",
+        "imagen": "images/Manicure SPA.jpg"
+    },
+    {
+        "id": 5,
+        "nombre": "Pedicure Normal",
+        "descripcion": "Deja tus pies arreglados con un acabado distinto.",
+        "precio": 12500,
+        "categoria": "Pedicure",
+        "imagen": "images/Pedi normal.jpg"
+    },
+    {
+        "id": 6,
+        "nombre": "Pedicure SPA",
+        "descripcion": "Relájate con un masaje y tina caliente para que tus pies queden con un acabado perfecto. Incluye esmaltado semi permanente.",
+        "precio": 13500,
+        "categoria": "Pedicure",
+        "imagen": "images/pedi spa.jpg"
+    }
+]
