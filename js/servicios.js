@@ -62,7 +62,7 @@ const servicios = [
         "precio": 13500,
         "categoria": "Adicionales",
         "imagen": "images/calcio.jpg"
-    }
+    },
     {
         "id": 9,
         "nombre": "Corte de Uñas",
