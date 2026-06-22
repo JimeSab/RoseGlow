@@ -116,6 +116,15 @@ Navegación
 }
 
 /* =========================
+<hr>
+========================= */
+hr {
+    border: none;
+    height: 1px;
+    background-color: #F5AFAF;
+}
+
+/* =========================
 Hero
 ========================= */
 
@@ -286,41 +295,78 @@ Servicios
 Filtros y busqueda
 ========================= */
 
-.filtros {
-    display: flex;
-    gap: 15px;
-    margin: 25px 0;
-    flex-wrap: wrap;
+.filters-panel {
+    background-color: linear-gradient(135deg, #FCF8F8, #FBEFEF);
+    border: 1px solid #F9DFDF;
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 24px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    align-items: end;
+
+    box-shadow: 0 10px 25px rgba(245, 175, 175, 0.18);
 }
 
-.filtros select,
-.filtros input {
-    padding: 12px 16px;
-    border: 2px solid #f9dfdf;
-    border-radius: 12px;
-    background-color: #fbefef;
-    font-size: 1rem;
-    outline: none;
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.filter-group label {
+    color: #7a3d3d;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.filter-group select {
+    width: 100%;
+    border: 1px solid #F9DFDF;
+    background-color: #fcf8f8;
+    color: #5c3b3b;
+    border-radius: 10px;
+    padding: 11px 12px;
+    font-size: 0.95rem;
     transition: 0.3s;
 }
 
-.filtros select {
-    min-width: 180px;
-}
-
-.filtros input {
-    width: 250px;
-}
-
-.filtros select:focus,
-.filtros input:focus {
+.filter-group select:hover {
     border-color: #f5afaf;
-    box-shadow: 0 0 10px rgba(245, 175, 175, 0.4);
 }
 
-.filtros select:hover,
-.filtros input:hover {
-    background-color: #fff5f5;
+.filter-group select:focus {
+    outline: none;
+    border-color: #F5AFAF;
+    box-shadow: 0 0 0 3px rgba(245, 175, 175, 0.25);
+}
+
+.btn-clear {
+    border: none;
+    border-radius: 10px;
+    background-color: #f5afaf;
+    color: #5c3b3b;
+    padding: 12px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-clear:hover {
+    background-color: #F9DFDF;
+}
+
+.services-message {
+    display: inline-block;
+    background-color: white;
+    color: #5c3b3b;
+    border-left: 5px solid #F5AFAF;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-weight: bold;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
 }
 
 /* =========================

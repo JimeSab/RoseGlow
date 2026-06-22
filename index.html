@@ -52,31 +52,36 @@
                         experiencia única en cada visita.
                     </p>
                 </div>
+
             </div>
         </section>
 
         <hr>
 
-    <section id="servicios" class="events-section">
-    <div class="container">
-        <h2>Nuestros Servicios</h2>
+        <section id="servicios" class="events-section">
+            <div class="container">
+                <h2>Nuestros Servicios</h2>
 
-        <div class="filtros">
-            <select id="filtroCategoria">
-                <option value="Todos">Todos</option>
-                <option value="Manicure">Manicure</option>
-                <option value="Pedicure">Pedicure</option>
-                <option value="Esmaltado">Esmaltado</option>
-            </select>
+                <div class="filters-panel">
+                    <div class="filter-group">
+                        <label for="filtroCategoria">Categoria</label>
+                        <select id="filtroCategoria">
+                            <option value="">Todas las categorias</option>
+                        </select>
+                    </div>
 
-            <input type="text" id="busquedaServicio" placeholder="Digite una palabra">
-        </div>
+                    <button id="btnLimpiarFiltros" class="btn-clear">
+                        Limpiar filtros
+                    </button>
+                </div>
 
-        <div class="servicios-grid" id="serviciosGrid">
+                <p id="mensajeServicios" class="services-message">
+                    Cargando eventos disponibles...
+                </p>
 
-        </div>
-    </div>
-</section>
+                <div class="servicios-grid" id="serviciosGrid"></div>
+            </div>
+        </section>
 
     </main>
 

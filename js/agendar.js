@@ -81,111 +81,101 @@ const servicios = [
     }
 ];
 
+const servicioElegido =
+    document.getElementById("servicioElegido");
 
-const serviciosGrid =
-    document.getElementById("serviciosGrid");
+const fechaCita =
+    document.getElementById("fechaCita");
 
-const filtroCategoria =
-    document.getElementById("filtroCategoria");
+const horaCita =
+    document.getElementById("horaCita");
 
-const btnLimpiarFiltros =
-    document.getElementById("btnLimpiarFiltros")
+const nombreCliente =
+    document.getElementById("nombreCliente");
 
-function obtenerCategorias() {
-    const categorias = [];
+const telefonoCliente =
+    document.getElementById("telefonoCliente");
 
+const correoCliente =
+    document.getElementById("correoCliente");
+
+const mensajeResumen =
+    document.getElementById("mensajeResumen");
+
+const resumenServicio =
+    document.getElementById("resumenServicio");
+
+const resumenFecha =
+    document.getElementById("resumenFecha");
+
+const resumenHora =
+    document.getElementById("resumenHora");
+
+const resumenNombre =
+    document.getElementById("resumenNombre");
+
+function cargarServicios() {
     for (const servicio of servicios) {
-        if (!categorias.includes(servicio.categoria)) {
-            categorias.push(servicio.categoria);
-        }
-    }
-
-    return categorias;
-}
-
-function cargarFiltros() {
-    const categorias = obtenerCategorias();
-
-    for (const categoria of categorias) {
         const option = document.createElement("option");
-        option.value = categoria;
-        option.textContent = categoria;
-
-        filtroCategoria.appendChild(option);
+        option.value = servicio.id;
+        option.textContent = servicio.nombre;
+        servicioElegido.appendChild(option);
     }
 }
 
+function actualizarResumen() {
 
+    const idServicio =
+        Number(servicioElegido.value);
 
-function crearTarjetaServicio(servicio) {
-    const tarjeta = document.createElement("article");
-    tarjeta.classList.add("servicios-card");
+    if (idServicio === 0) {
 
-    tarjeta.innerHTML = `
-        <figure>
-            <img src="${servicio.imagen}" alt="${servicio.nombre}">
-            <figcaption>${servicio.descripcion}</figcaption>
-        </figure>
+        mensajeResumen.textContent =
+            "Aún no has seleccionado ningún servicio";
 
-        <div class="servicios-card-content">
-            <h3>${servicio.nombre}</h3>
-            <span class="servicios-category">
-                Precio: ₡${servicio.precio}
-            </span>
-        </div>
-    `;
+        resumenServicio.textContent = "-";
 
-    return tarjeta;
-}
-
-function renderizarServicios(lista) {
-    serviciosGrid.innerHTML = "";
-
-    if (lista.length === 0) {
-        serviciosGrid.innerHTML = `
-            <p>No hay servicios disponibles.</p>
-        `;
         return;
     }
 
-    for (const servicio of lista) {
-        const tarjeta = crearTarjetaServicio(servicio);
-        serviciosGrid.appendChild(tarjeta);
-    }
+    const servicio =
+        servicios.find(function (servicio) {
 
-    const mensajeServicios = document.getElementById("mensajeServicios");
+            return servicio.id === idServicio;
+        });
 
-    if (mensajeServicios) {
-        mensajeServicios.textContent =
-            `Mostrando ${lista.length} servicio(s) disponible(s).`;
-    }
+    mensajeResumen.textContent = "";
+
+    resumenServicio.textContent =
+        servicio.nombre;
+
+    resumenFecha.textContent =
+        fechaCita.value || "-";
+
+    resumenHora.textContent =
+        horaCita.value || "-";
+
+    resumenNombre.textContent =
+        nombreCliente.value || "-";
 }
 
-function filtrarServicios() {
-    const categoriaSeleccionada = filtroCategoria.value;
+servicioElegido.addEventListener("change",
+    actualizarResumen
+);
 
-    const filtrados = servicios.filter(function (servicio) {
+fechaCita.addEventListener("change",
+    actualizarResumen
+);
 
-        const cumpleCategoria =
-            categoriaSeleccionada === "" ||
-            servicio.categoria === categoriaSeleccionada;
+horaCita.addEventListener("change",
+    actualizarResumen
+);
 
-        return cumpleCategoria;
-    });
-
-    renderizarServicios(filtrados);
-}
-
-function limpiarFiltros() {
-    filtroCategoria.value = "";
-    renderizarServicios(servicios);
-}
-
-// Evento Change se ejecuta cuando el usuario cambia el select
-filtroCategoria.addEventListener("change", filtrarServicios);
-btnLimpiarFiltros.addEventListener("click", limpiarFiltros);
+nombreCliente.addEventListener("input",
+    actualizarResumen
+);
 
 document.addEventListener("DOMContentLoaded", function () {
-    cargarFiltros();
-    renderizarServicios(servicios);
-});
+    cargarServicios();
+}
+);
