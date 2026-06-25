@@ -114,6 +114,12 @@ const resumenHora =
 const resumenNombre =
     document.getElementById("resumenNombre");
 
+const formularioCita =
+    document.querySelector(".formularioCita");
+
+const resumenConfirmacion =
+    document.getElementById("resumenConfirmacion");
+
 function cargarServicios() {
     for (const servicio of servicios) {
         const option = document.createElement("option");
@@ -134,6 +140,9 @@ function actualizarResumen() {
             "Aún no has seleccionado ningún servicio";
 
         resumenServicio.textContent = "-";
+        resumenFecha.textContent = "-";
+        resumenHora.textContent = "-";
+        resumenNombre.textContent = "-";
 
         return;
     }
@@ -159,10 +168,51 @@ function actualizarResumen() {
         nombreCliente.value || "-";
 }
 
+function confirmarCita(event) {
+    event.preventDefault();
+
+    const idServicio =
+        Number(servicioElegido.value);
+
+    const servicio =
+        servicios.find(function (servicio) {
+
+            return servicio.id === idServicio;
+        });
+
+    const fecha =
+        fechaCita.value;
+
+    const hora =
+        horaCita.value;
+
+    const nombre =
+        nombreCliente.value.trim();
+
+    const telefono =
+        telefonoCliente.value.trim();
+
+    const correo =
+        correoCliente.value.trim();
+
+    resumenConfirmacion.classList.remove("summary-error");
+    resumenConfirmacion.classList.add("summary-success");
+
+    resumenConfirmacion.innerHTML = `
+        <h3>Tu cita ha sido confirmada</h3>
+        <p><strong>Cliente:</strong> ${nombre}</p>
+        <p><strong>Teléfono:</strong> ${telefono}</p>
+        <p><strong>Correo:</strong> ${correo || "No indicado"}</p>
+        <p><strong>Servicio:</strong> ${servicio.nombre}</p>
+        <p><strong>Fecha:</strong> ${fecha}</p>
+        <p><strong>Hora:</strong> ${hora}</p>
+    `;
+}
+
+
 servicioElegido.addEventListener("change",
     actualizarResumen
 );
-
 fechaCita.addEventListener("change",
     actualizarResumen
 );
@@ -174,8 +224,29 @@ horaCita.addEventListener("change",
 nombreCliente.addEventListener("input",
     actualizarResumen
 );
-
+formularioCita.addEventListener("submit",
+    confirmarCita
+);
 document.addEventListener("DOMContentLoaded", function () {
     cargarServicios();
 }
 );
+telefonoCliente.addEventListener("input", function () {
+    telefonoCliente.value = telefonoCliente.value.replace(/[^0-9]/g, "");
+});
+
+const hoy = new Date();
+const anio = hoy.getFullYear();
+const mes = String(hoy.getMonth() + 1).padStart(2, "0");
+const dia = String(hoy.getDate()).padStart(2, "0");
+
+const fechaActual = anio + "-" + mes + "-" + dia;
+
+fechaCita.min = fechaActual;
+
+fechaCita.addEventListener("change", function () {
+    if (fechaCita.value < fechaActual) {
+        alert("No puedes seleccionar una fecha anterior a hoy.");
+        fechaCita.value = "";
+    }
+});

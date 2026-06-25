@@ -18,10 +18,10 @@
                 <img src="images/logo horizontal.png" alt="Logo Rose Glow" class="logo">
             </div>
 
-            <!-- *** Checkbox oculto para controlar el menú hamburguesa sin JavaScript -->
+            <!-- * Checkbox oculto para controlar el menú hamburguesa sin JavaScript -->
             <input type="checkbox" id="menu-toggle" class="menu-toggle">
 
-            <!-- *** Botón visual del menú hamburguesa -->
+            <!-- * Botón visual del menú hamburguesa -->
             <label for="menu-toggle" class="menu-button">
                 <span></span>
                 <span></span>
@@ -36,7 +36,7 @@
                     <li><a href="index.html#contacto">Contacto</a></li>
                 </ul>
             </nav>
-    <a href="agendar.html" class="btn-agendar" onclick="alert('Tu cita ha sido confirmada correctamente.')">Agendar Cita</a>
+            <a href="agendar.html" class="btn-agendar">Agendar Cita</a>
         </div>
     </header>
     <main>
@@ -62,7 +62,7 @@
                         <div class="form-fechaHora">
                             <div class="campo-fecha">
                                 <label for="fechaCita">2. Selecciona la fecha</label>
-                            <input type="date" id="fechaCita" name="fechaCita" min="2026-01-01" max="2026-12-31" />
+                        <input type="date" id="fechaCita" name="fechaCita" required>
                             </div>
                             
                             <div class="campo-hora">
@@ -76,7 +76,14 @@
                             <br>
                             <input type="text" id="nombreCliente" required placeholder="Nombre completo">
                             <br>
-                            <input type="tel" id="telefonoCliente" placeholder="Teléfono">
+                            <input 
+    type="text" 
+    id="telefonoCliente" 
+    placeholder="Teléfono" 
+    maxlength="8" 
+    pattern="[0-9]{8}" 
+    required
+>
                             <br>
                             <input type="email" id="correoCliente" placeholder="Correo electrónico">
                             <br>
@@ -88,10 +95,12 @@
                             Confirmar cita
                         </button>
                         <br>
-                        <small class="mensaje-seguridad">
-                            <img src="images/candado.png" alt="seguridad" class="icono-seguridad">
-                            Tu información está protegida y solo será utilizada para tu cita
-                        </small>
+                    <small class="mensaje-seguridad">
+    <img src="images/candado.png" alt="seguridad" class="icono-seguridad">
+    Tu información está protegida y solo será utilizada para tu cita
+</small>
+
+<div id="resumenConfirmacion" class="appointment-summary"></div>       
                     </form>
 
                     <div class="panel-derecho">
@@ -174,7 +183,8 @@
             <small>&copy; 2026 Rose Glow. Todos los derechos reservados.</small>
         </p>
     </footer>
-    <script src="js/agendar.js"></script>
+<script src="js/agendar.js"></script>
+
 </body>
 
 </html>
