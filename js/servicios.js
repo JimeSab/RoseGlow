@@ -130,7 +130,7 @@ function crearTarjetaServicio(servicio) {
         <div class="servicios-card-content">
             <h3>${servicio.nombre}</h3>
             <span class="servicios-category">
-                Precio: ₡${servicio.precio}
+                Precio: ₡${servicio.precio.toLocaleString()}
             </span>
         </div>
     `;

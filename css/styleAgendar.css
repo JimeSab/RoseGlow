@@ -167,3 +167,16 @@ Iconos
     width: 26px;
     height: 26px;
 }
+
+/* =========================
+Confirmar cita
+========================= */
+.mensaje-confirmacion {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #F9DFDF;
+    color: #7a3d3d;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: bold;
+}
