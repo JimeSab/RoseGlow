@@ -13,7 +13,7 @@ html {
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Trebuchet MS', sans-serif;
     background-color: #fcf8f8;
     color: #000;
     line-height: 1.6;
@@ -499,4 +499,20 @@ MEDIA QUERY MÓVIL PEQUEÑO
     .hero-text h1 {
         font-size: 1.75rem;
     }
+}
+
+/* =========================
+Fuentes
+========================= */
+
+h1, h2, h3 {
+    font-family: Georgia, serif;
+}
+
+button,
+input,
+select,
+textarea,
+a {
+    font-family: 'Trebuchet MS', sans-serif;
 }
