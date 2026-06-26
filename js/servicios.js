@@ -61,7 +61,7 @@ const servicios = [
         "descripcion": "Una capa extra de fortaleza con calcio para la salud de tus uñas.",
         "precio": 13500,
         "categoria": "Adicionales",
-        "imagen": "images/calcio.jpg"
+        "imagen": "images/calicio uñass.jpg"
     },
     {
         "id": 9,
