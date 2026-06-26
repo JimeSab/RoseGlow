@@ -1,3 +1,10 @@
+// =====================================================
+// Persistencia de datos
+// localStorage: Servicios
+//=====================================================
+
+const STORAGE_CITAS = "roseglow_citas";
+
 const servicios = [
     {
         "id": 1,
@@ -98,7 +105,8 @@ const telefonoCliente =
 
 const correoCliente =
     document.getElementById("correoCliente");
-
+const notaAdicional =
+    document.getElementById("notaAdicional");
 const mensajeResumen =
     document.getElementById("mensajeResumen");
 
@@ -119,7 +127,8 @@ const formularioCita =
 
 const resumenConfirmacion =
     document.getElementById("resumenConfirmacion");
-
+const listaCitasGuardadas =
+    document.getElementById("listaCitasGuardadas");
 function cargarServicios() {
     for (const servicio of servicios) {
         const option = document.createElement("option");
@@ -176,7 +185,6 @@ function confirmarCita(event) {
 
     const servicio =
         servicios.find(function (servicio) {
-
             return servicio.id === idServicio;
         });
 
@@ -207,8 +215,128 @@ function confirmarCita(event) {
         <p><strong>Fecha:</strong> ${fecha}</p>
         <p><strong>Hora:</strong> ${hora}</p>
     `;
+
+    crearCitaPersistente();
 }
 
+// =====================================================
+// Funciones para localStorage
+// =====================================================
+
+function obtenerCitas() {
+    const datosGuardados =
+        localStorage.getItem(STORAGE_CITAS);
+
+    if (!datosGuardados) {
+        return [];
+    }
+
+    return JSON.parse(datosGuardados);
+}
+
+function guardarCitas(citas) {
+    localStorage.setItem(
+        STORAGE_CITAS,
+        JSON.stringify(citas)
+    );
+}
+
+function crearCitaPersistente() {
+    const idServicio =
+        Number(servicioElegido.value);
+
+    const servicio =
+        servicios.find(function (servicio) {
+            return servicio.id === idServicio;
+        });
+
+    const nuevaCita = {
+        id: crypto.randomUUID(),
+        servicioId: servicio.id,
+        servicioNombre: servicio.nombre,
+        fecha: fechaCita.value,
+        hora: horaCita.value,
+        nombre: nombreCliente.value.trim(),
+        telefono: telefonoCliente.value.trim(),
+        correo: correoCliente.value.trim(),
+        nota: notaAdicional.value.trim(),
+        fechaRegistro: new Date().toISOString()
+    };
+
+    const citas =
+        obtenerCitas();
+
+    citas.push(nuevaCita);
+
+    guardarCitas(citas);
+
+    renderizarCitas();
+}
+
+function eliminarCita(idCita) {
+    const confirmar =
+        confirm("¿Deseas eliminar esta cita?");
+
+    if (!confirmar) {
+        return;
+    }
+
+    const citas =
+        obtenerCitas();
+
+    const citasFiltradas =
+        citas.filter(function (cita) {
+            return cita.id !== idCita;
+        });
+
+    guardarCitas(citasFiltradas);
+
+    renderizarCitas();
+}
+
+function renderizarCitas() {
+    const citas =
+        obtenerCitas();
+
+    if (citas.length === 0) {
+        listaCitasGuardadas.innerHTML = `
+            <div class="empty-state">
+                <h4>Sin citas guardadas</h4>
+                <p>Todavía no hay citas registradas.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    listaCitasGuardadas.innerHTML =
+        citas.map(function (cita) {
+            return `
+                <article class="cita-card">
+                    <div class="cita-main">
+                        <span class="cita-badge">Cita guardada</span>
+
+                        <h4>${cita.servicioNombre}</h4>
+
+                        <div class="cita-info">
+                            <p><strong>Cliente:</strong> ${cita.nombre}</p>
+                            <p><strong>Teléfono:</strong> ${cita.telefono}</p>
+                            <p><strong>Correo:</strong> ${cita.correo || "No indicado"}</p>
+                            <p><strong>Fecha:</strong> ${cita.fecha}</p>
+                            <p><strong>Hora:</strong> ${cita.hora}</p>
+                            <p><strong>Nota:</strong> ${cita.nota || "Sin nota adicional"}</p>
+                        </div>
+                    </div>
+
+                    <div class="cita-actions">
+                        <button type="button" class="btn-delete" onclick="eliminarCita('${cita.id}')">
+                            Eliminar
+                        </button>
+                    </div>
+                </article>
+            `;
+        }).join("");
+}
 
 servicioElegido.addEventListener("change",
     actualizarResumen
@@ -229,8 +357,8 @@ formularioCita.addEventListener("submit",
 );
 document.addEventListener("DOMContentLoaded", function () {
     cargarServicios();
-}
-);
+    renderizarCitas();
+});
 telefonoCliente.addEventListener("input", function () {
     telefonoCliente.value = telefonoCliente.value.replace(/[^0-9]/g, "");
 });

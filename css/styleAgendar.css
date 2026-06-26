@@ -205,3 +205,75 @@ Confirmar cita
 .appointment-summary:empty {
     display: none;
 }
+
+/* =========================
+Citas guardadas localStorage
+========================= */
+
+.citas-guardadas {
+    margin-top: 24px;
+}
+
+.empty-state {
+    margin-top: 18px;
+    padding: 18px 20px;
+    background-color: #FCF8F8;
+    border-left: 6px solid #F5AFAF;
+    color: #5c3b3b;
+    font-weight: bold;
+}
+
+.empty-state h4 {
+    margin-bottom: 8px;
+    color: #8a4a4a;
+}
+
+.empty-state p {
+    margin-bottom: 6px;
+}
+
+.cita-card {
+    margin-top: 18px;
+    padding: 18px 20px;
+    background-color: #FCF8F8;
+    border-left: 6px solid #F5AFAF;
+    color: #5c3b3b;
+    box-shadow: 0 8px 20px rgba(245, 175, 175, 0.25);
+}
+
+.cita-badge {
+    display: inline-block;
+    background-color: #F5AFAF;
+    color: #5c3b3b;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.cita-card h4 {
+    margin-bottom: 10px;
+    color: #8a4a4a;
+}
+
+.cita-info p {
+    margin-bottom: 6px;
+}
+
+.cita-actions {
+    margin-top: 14px;
+}
+
+.btn-delete {
+    border: none;
+    background-color: #dc2626;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-delete:hover {
+    background-color: #b91c1c;
+}
