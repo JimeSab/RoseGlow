@@ -277,3 +277,72 @@ Citas guardadas localStorage
 .btn-delete:hover {
     background-color: #b91c1c;
 }
+
+/* =========================
+MEDIA QUERY TABLET
+========================= */
+
+/*  Ajustes para pantallas medianas */
+@media (max-width: 900px) {
+    .agendar-content {
+        flex-direction: column;
+    }
+
+    .formularioCita,
+    .panel-derecho {
+        width: 100%;
+    }
+}
+
+/* =========================
+MEDIA QUERY MÓVIL
+========================= */
+
+/*  Ajustes para pantallas pequeñas */
+@media (max-width: 700px) {
+    .form-fechaHora {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .formularioCita,
+    .resumen,
+    .infoImportante {
+        padding: 20px;
+    }
+
+    .resumen h2,
+    .infoImportante h2 {
+        font-size: 1.8rem;
+    }
+
+    .mensaje-seguridad,
+    .info1,
+    .info2,
+    .info3,
+    .info4 {
+        flex-wrap: wrap;
+    }
+}
+
+/* =========================
+MEDIA QUERY MÓVIL PEQUEÑO
+========================= */
+
+/*  Ajustes para teléfonos angostos */
+@media (max-width: 420px) {
+    .agendar-titulo h1 {
+        font-size: 2rem;
+    }
+
+    .resumen h2,
+    .infoImportante h2 {
+        font-size: 1.5rem;
+    }
+
+    .formularioCita input,
+    .formularioCita select,
+    .formularioCita textarea {
+        font-size: 0.9rem;
+    }
+}

@@ -40,19 +40,14 @@
     <main>
         <section id="inicio" class="hero">
             <div class="container hero-content">
-                <figure class="hero-image">
-                    <img src="images/imagen hero.jpg" alt="Diseño de uñas">
-                </figure>
-                <div class="hero-text">
-                    <h1>Bienvenido a Rose Glow</h1>
-                    <p>
-                        Un espacio donde la belleza, el cuidado personal y la confianza se encuentran.</p>
-                    <p>
-                        Creemos que cada persona merece dedicar tiempo a sí misma, por lo que trabajamos para ofrecer una
-                        experiencia única en cada visita.
-                    </p>
+                <div class="hero-carrusel">
+                    <img id="imagenCarrusel" src="images/hero1.jpg" alt="Imagen de carrusel">
                 </div>
-
+                <div class="hero-text">
+                    <h1 id="tituloHero"></h1>
+                    <p id="textoHero1"></p>
+                    <p id="textoHero2"></p>
+                </div>
             </div>
         </section>
 
@@ -69,7 +64,10 @@
                             <option value="">Todas las categorias</option>
                         </select>
                     </div>
-
+                    <div class="filter-group">
+                                                <label for="busquedaServicio">Buscar servicio</label>
+                        <input type="text" id="busquedaServicio" placeholder="Digite una palabra">
+                    </div>
                     <button id="btnLimpiarFiltros" class="btn-clear">
                         Limpiar filtros
                     </button>
@@ -108,7 +106,9 @@
             <small>&copy; 2026 Rose Glow. Todos los derechos reservados.</small>
         </p>
     </footer>
+    <script src="js/jsonLoader.js"></script>
     <script src="js/servicios.js"></script>
+    <script src="js/hero.js"></script>
 </body>
 
 </html>

@@ -296,14 +296,14 @@ Filtros y busqueda
 ========================= */
 
 .filters-panel {
-    background-color: linear-gradient(135deg, #FCF8F8, #FBEFEF);
+    background: linear-gradient(135deg, #FCF8F8, #FBEFEF);
     border: 1px solid #F9DFDF;
     border-radius: 18px;
     padding: 22px;
     margin-bottom: 24px;
 
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr 1fr auto;
     gap: 16px;
     align-items: end;
 
@@ -322,7 +322,8 @@ Filtros y busqueda
     font-size: 0.9rem;
 }
 
-.filter-group select {
+.filter-group select,
+            input {
     width: 100%;
     border: 1px solid #F9DFDF;
     background-color: #fcf8f8;
@@ -333,11 +334,13 @@ Filtros y busqueda
     transition: 0.3s;
 }
 
-.filter-group select:hover {
+.filter-group select:hover 
+            input:hover {
     border-color: #f5afaf;
 }
 
-.filter-group select:focus {
+.filter-group select:focus 
+            input:focus {
     outline: none;
     border-color: #F5AFAF;
     box-shadow: 0 0 0 3px rgba(245, 175, 175, 0.25);
