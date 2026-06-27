@@ -29,7 +29,7 @@
             <!-- Navegación principal -->
             <nav class="main-nav">
                 <ul>
-                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="index.html" class="active-link">Inicio</a></li>
                     <li><a href="#servicios">Servicios</a></li>
                     <li><a href="#contacto">Contacto</a></li>
                 </ul>
@@ -37,6 +37,14 @@
             <a href="agendar.html" class="btn-agendar">Agendar Cita</a>
         </div>
     </header>
+    <!-- Ubicacion actual -->
+    <nav class="breadcrumb" aria-label="Ubicación actual">
+        <div class="container">
+            <a href="index.html">Inicio</a>
+            <span>Inicio</span>
+        </div>
+    </nav>
+    <!-- Contenido principal -->
     <main>
         <section id="inicio" class="hero">
             <div class="container hero-content">
@@ -65,7 +73,7 @@
                         </select>
                     </div>
                     <div class="filter-group">
-                                                <label for="busquedaServicio">Buscar servicio</label>
+                        <label for="busquedaServicio">Buscar servicio</label>
                         <input type="text" id="busquedaServicio" placeholder="Digite una palabra">
                     </div>
                     <button id="btnLimpiarFiltros" class="btn-clear">

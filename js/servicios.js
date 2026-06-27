@@ -43,6 +43,9 @@ function crearTarjetaServicio(servicio) {
     tarjeta.innerHTML = `
         <figure>
             <img src="${servicio.imagen}" alt="${servicio.nombre}">
+            <span class="badge-estado ${servicio.estado}">
+                ${servicio.estado}
+            </span>
             <figcaption>${servicio.descripcion}</figcaption>
         </figure>
 

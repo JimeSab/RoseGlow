@@ -21,7 +21,7 @@ let indiceActual = 0;
 
 async function cargarHero() {
     try {
-        const respuesta = 
+        const respuesta =
             await fetch("data/hero.json");
 
         const hero =

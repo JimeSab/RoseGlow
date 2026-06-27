@@ -5,6 +5,7 @@
         "descripcion": "Perfecto para cuando tienes prisa pero quieres que tus uñas estén arregladas.",
         "precio": 7500,
         "categoria": "Esmaltado",
+        "estado": "Disponible",
         "imagen": "images/esmalte normal.jpg"
     },
     {
@@ -13,14 +14,16 @@
         "descripcion": "Disfruta de un acabado elegante y duradero.",
         "precio": 12000,
         "categoria": "Esmaltado",
+        "estado": "Disponible",
         "imagen": "images/esmaltado semi.jpg"
     },
     {
         "id": 3,
         "nombre": "Esmaltado Acrilico",
-        "descripcion": "Disfrutado de un acabado elegante y duradero, eligiendo el largo y forma deseada.",
+        "descripcion": "Disfruta de un acabado elegante y duradero, eligiendo el largo y forma deseada.",
         "precio": 14000,
         "categoria": "Esmaltado",
+        "estado": "Disponible",
         "imagen": "images/Acrilico.jpg"
     },
     {
@@ -29,6 +32,7 @@
         "descripcion": "Deja tus uñas y manos en perfecto estado para un acabado más elegante. Incluye esmaltado regular.",
         "precio": 12500,
         "categoria": "Manicure",
+        "estado": "Disponible",
         "imagen": "images/manicure normal.jpg"
     },
     {
@@ -37,6 +41,7 @@
         "descripcion": "Relájate con un masaje y una exfoliación, dejando tus uñas en perfecto estado. Incluye esmaltado semipermanente.",
         "precio": 13500,
         "categoria": "Manicure",
+        "estado": "Disponible",
         "imagen": "images/Manicure SPA.jpg"
     },
     {
@@ -45,6 +50,7 @@
         "descripcion": "Deja tus pies arreglados con un acabado distinto.",
         "precio": 12500,
         "categoria": "Pedicure",
+        "estado": "Disponible",
         "imagen": "images/Pedi normal.jpg"
     },
     {
@@ -53,6 +59,7 @@
         "descripcion": "Relájate con un masaje y tina caliente para que tus pies queden con un acabado perfecto. Incluye esmaltado semi permanente.",
         "precio": 13500,
         "categoria": "Pedicure",
+        "estado": "Disponible",
         "imagen": "images/pedi spa.jpg"
     },
     {
@@ -61,6 +68,7 @@
         "descripcion": "Una capa extra de fortaleza con calcio para la salud de tus uñas.",
         "precio": 13500,
         "categoria": "Adicionales",
+        "estado": "Disponible",
         "imagen": "images/calicio uñass.jpg"
     },
     {
@@ -69,6 +77,7 @@
         "descripcion": "Dejamos tus uñas en la forma y largo deseado.",
         "precio": 500,
         "categoria": "Adicionales",
+        "estado": "Disponible",
         "imagen": "images/corte uñas.jpg"
     },
     {
@@ -77,6 +86,7 @@
         "descripcion": "Un adicional por remover procedimientos realizados en otros salones distintos a Rose Glow.",
         "precio": 700,
         "categoria": "Adicionales",
+        "estado": "Disponible",
         "imagen": "images/quitar producto.jpg"
     }
 ]

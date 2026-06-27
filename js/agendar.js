@@ -105,13 +105,18 @@ const telefonoCliente =
 
 const correoCliente =
     document.getElementById("correoCliente");
+
 const notaAdicional =
     document.getElementById("notaAdicional");
+
 const mensajeResumen =
     document.getElementById("mensajeResumen");
 
 const resumenServicio =
     document.getElementById("resumenServicio");
+
+const resumenPrecio =
+    document.getElementById("resumenPrecio");
 
 const resumenFecha =
     document.getElementById("resumenFecha");
@@ -127,8 +132,13 @@ const formularioCita =
 
 const resumenConfirmacion =
     document.getElementById("resumenConfirmacion");
+
 const listaCitasGuardadas =
     document.getElementById("listaCitasGuardadas");
+
+const btnLimpiarForm =
+    document.getElementById("btnLimpiarForm");
+
 function cargarServicios() {
     for (const servicio of servicios) {
         const option = document.createElement("option");
@@ -143,12 +153,13 @@ function actualizarResumen() {
     const idServicio =
         Number(servicioElegido.value);
 
-    if (idServicio === 0) {
+    if (!idServicio) {
 
         mensajeResumen.textContent =
             "Aún no has seleccionado ningún servicio";
 
         resumenServicio.textContent = "-";
+        resumenPrecio.textContent = "-";
         resumenFecha.textContent = "-";
         resumenHora.textContent = "-";
         resumenNombre.textContent = "-";
@@ -167,6 +178,9 @@ function actualizarResumen() {
     resumenServicio.textContent =
         servicio.nombre;
 
+    resumenPrecio.textContent =
+        "₡" + servicio.precio;
+
     resumenFecha.textContent =
         fechaCita.value || "-";
 
@@ -178,15 +192,11 @@ function actualizarResumen() {
 }
 
 function confirmarCita(event) {
+
     event.preventDefault();
 
     const idServicio =
         Number(servicioElegido.value);
-
-    const servicio =
-        servicios.find(function (servicio) {
-            return servicio.id === idServicio;
-        });
 
     const fecha =
         fechaCita.value;
@@ -203,6 +213,41 @@ function confirmarCita(event) {
     const correo =
         correoCliente.value.trim();
 
+    if (!idServicio) {
+        mostrarError("Debe seleccionar un servicio");
+        return;
+    }
+
+    if (nombre.length < 3) {
+        mostrarError("El nombre debe tener al menos 3 letras");
+        return;
+    }
+
+    if (telefono.length !== 8) {
+        mostrarError("El telefono debe tener 8 digitos");
+        return;
+    }
+
+    if (!fecha) {
+        mostrarError("Debe seleccionar una fecha");
+        return;
+    }
+
+    if (!hora) {
+        mostrarError("Debe seleccionar una hora");
+        return;
+    }
+
+    const servicio =
+        servicios.find(function (servicio) {
+            return servicio.id === idServicio;
+        });
+
+    if (fecha < fechaActual) {
+        mostrarError("No puede agendar citas en fechas pasadas");
+        return;
+    }
+
     resumenConfirmacion.classList.remove("summary-error");
     resumenConfirmacion.classList.add("summary-success");
 
@@ -212,12 +257,48 @@ function confirmarCita(event) {
         <p><strong>Teléfono:</strong> ${telefono}</p>
         <p><strong>Correo:</strong> ${correo || "No indicado"}</p>
         <p><strong>Servicio:</strong> ${servicio.nombre}</p>
+        <p><strong>Precio:</strong> ₡${servicio.precio.toLocaleString()}</p>
         <p><strong>Fecha:</strong> ${fecha}</p>
         <p><strong>Hora:</strong> ${hora}</p>
     `;
 
     crearCitaPersistente();
 }
+
+function mostrarError(mensaje) {
+    resumenConfirmacion.classList.remove("summary-success");
+    resumenConfirmacion.classList.add("summary-error");
+
+    resumenConfirmacion.innerHTML = `
+        <h3>Error</h3>
+        <p>${mensaje}</p>
+    `;
+}
+
+// VALIDACION EN TIEMPO REAL DE NOMBRE Y TELEFONO
+const errorNombre =
+    document.getElementById("errorNombre");
+
+nombreCliente.addEventListener("input", function () {
+    if (nombreCliente.value.trim().length < 3) {
+        errorNombre.textContent =
+            "Debe contener al menos 3 letras";
+    } else {
+        errorNombre.textContent = "";
+    }
+});
+
+const errorTelefono =
+    document.getElementById("errorTelefono");
+
+telefonoCliente.addEventListener("input", function () {
+    if (telefonoCliente.value.length > 0 && telefonoCliente.value.length < 8) {
+        errorTelefono.textContent =
+            "Debe contener 8 digitos";
+    } else {
+        errorTelefono.textContent = "";
+    }
+});
 
 // =====================================================
 // Funciones para localStorage
@@ -358,6 +439,8 @@ formularioCita.addEventListener("submit",
 document.addEventListener("DOMContentLoaded", function () {
     cargarServicios();
     renderizarCitas();
+
+
 });
 telefonoCliente.addEventListener("input", function () {
     telefonoCliente.value = telefonoCliente.value.replace(/[^0-9]/g, "");
@@ -372,9 +455,32 @@ const fechaActual = anio + "-" + mes + "-" + dia;
 
 fechaCita.min = fechaActual;
 
-fechaCita.addEventListener("change", function () {
-    if (fechaCita.value < fechaActual) {
-        alert("No puedes seleccionar una fecha anterior a hoy.");
-        fechaCita.value = "";
+btnLimpiarForm.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const confirmar =
+        confirm("¿Deseas limpiar el formulario?");
+
+    if (!confirmar) {
+        return;
     }
-});
+
+    // Limpia formulario 
+    formularioCita.reset();
+
+    // Reset select
+    servicioElegido.value = "";
+
+    // Limpiar resumen visual
+    mensajeResumen.textContent = "Aún no has seleccionado ningún servicio";
+
+    resumenServicio.textContent = "-";
+    resumenPrecio.textContent = "-";
+    resumenFecha.textContent = "-";
+    resumenHora.textContent = "-";
+    resumenNombre.textContent = "-";
+
+    resumenConfirmacion.innerHTML = "";
+})
+
+window.eliminarCita = eliminarCita;

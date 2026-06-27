@@ -41,7 +41,7 @@ Utilidades generales
 Header
 ========================= */
 
-.site-header{
+.site-header {
     background-color: #f5afaf;
     padding: 3px 0;
 
@@ -53,14 +53,14 @@ Header
     z-index: 1000;
 }
 
-.header-content{
+.header-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
     min-height: 90px;
 }
 
-.logo{
+.logo {
     width: 180px;
     height: auto;
 }
@@ -108,7 +108,8 @@ Navegación
     padding: 8px 10px;
     border-radius: 6px;
     display: inline-block;
-    transition: 0.3s; /* Cambio de color mas suave */
+    transition: 0.3s;
+    /* Cambio de color mas suave */
 }
 
 .main-nav a:hover {
@@ -181,7 +182,8 @@ Boton Agendar
     border-radius: 25px;
     font-size: 1.2rem;
     text-decoration: none;
-    transition: 0.3s; /* Cambio de color mas suave */
+    transition: 0.3s;
+    /* Cambio de color mas suave */
 
     /* Se centra el texto del boton cuando se hace mas pequeña la pantalla*/
     display: flex;
@@ -218,6 +220,52 @@ footer iframe {
     margin-top: 15px;
     border: none;
     border-radius: 10px;
+}
+
+/* =========================
+UX: NAVEGACIÓN ACTIVA
+========================= */
+
+/*  Indica visualmente la página actual */
+.main-nav a.active-link {
+    background-color: #F9DFDF;
+    color: #000;
+    border-radius: 6px;
+}
+
+/* =========================
+UX: UBICACIÓN ACTUAL
+========================= */
+
+/*  Breadcrumb muestra dónde está el usuario */
+.breadcrumb {
+    margin-top: 5px;
+    background-color: #FCF8F8;
+    padding: 12px 0;
+}
+
+/*  Distribución simple de ruta */
+.breadcrumb .container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+/*  Separador visual sin agregar texto extra al HTML */
+.breadcrumb a::after {
+    content: "/";
+    margin-left: 8px;
+    color: black;
+}
+
+.breadcrumb a {
+    color: black;
+    font-weight: bold;
+}
+
+.breadcrumb span {
+    color: black;
 }
 
 /*======================
@@ -291,6 +339,23 @@ Servicios
     font-weight: bold;
 }
 
+.badge-estado {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #F5AFAF;
+    color: black;
+    padding: 6px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    z-index: 5;
+}
+
+.servicios-card figure {
+    position: relative;
+}
+
 /* =========================
 Filtros y busqueda
 ========================= */
@@ -323,7 +388,7 @@ Filtros y busqueda
 }
 
 .filter-group select,
-            input {
+.filter-group input {
     width: 100%;
     border: 1px solid #F9DFDF;
     background-color: #fcf8f8;
@@ -334,13 +399,11 @@ Filtros y busqueda
     transition: 0.3s;
 }
 
-.filter-group select:hover 
-            input:hover {
+.filter-group select:hover .filter-group input:hover {
     border-color: #f5afaf;
 }
 
-.filter-group select:focus 
-            input:focus {
+.filter-group select:focus .filter-group input:focus {
     outline: none;
     border-color: #F5AFAF;
     box-shadow: 0 0 0 3px rgba(245, 175, 175, 0.25);
@@ -508,7 +571,9 @@ MEDIA QUERY MÓVIL PEQUEÑO
 Fuentes
 ========================= */
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: Georgia, serif;
 }
 

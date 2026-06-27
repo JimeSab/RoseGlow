@@ -22,7 +22,7 @@ Formulario
     margin-bottom: 30px;
 }
 
-.formularioCita{
+.formularioCita {
     width: 65%;
 }
 
@@ -77,20 +77,28 @@ Formulario
 Boton confirmar
 ========================= */
 
-.btn-Confirmar {
+.btn-group {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+
+
+.btn-Confirmar,
+.btn-Limpiar {
+    flex: 1;
     background-color: #f5afaf;
     color: black;
     border: none;
     border-radius: 25px;
-    padding: 15px 25px;
     cursor: pointer;
     font-size: 1rem;
-    transition: 0.3s;
-    width: 100%;
     padding: 12px;
+    transition: 0.3s;
 }
 
-.btn-Confirmar:hover {
+.btn-Confirmar:hover,
+.btn-Limpiar:hover {
     background-color: #f9dfdf;
     border-color: #f5afaf;
 }
@@ -202,6 +210,7 @@ Confirmar cita
     background-color: #FBEFEF;
     color: #5c3b3b;
 }
+
 .appointment-summary:empty {
     display: none;
 }

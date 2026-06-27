@@ -39,6 +39,14 @@
             <a href="agendar.html" class="btn-agendar">Agendar Cita</a>
         </div>
     </header>
+    <!-- Ubicacion actual -->
+    <nav class="breadcrumb" aria-label="Ubicación actual">
+        <div class="container">
+            <a href="index.html">Inicio</a>
+            <span>Agendar Cita</span>
+        </div>
+    </nav>
+    <!-- Contenido principal -->
     <main>
 
         <section class="agendar">
@@ -62,47 +70,48 @@
                         <div class="form-fechaHora">
                             <div class="campo-fecha">
                                 <label for="fechaCita">2. Selecciona la fecha</label>
-                        <input type="date" id="fechaCita" name="fechaCita" required>
+                                <input type="date" id="fechaCita" name="fechaCita" required>
                             </div>
-                            
+
                             <div class="campo-hora">
                                 <label for="horaCita">3. Selecciona la hora</label>
-                            <input type="time" id="horaCita" name="horaCita" min="09:00" max="18:00" />
+                                <input type="time" id="horaCita" name="horaCita" min="09:00" max="18:00" />
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="datosPersonales">4. Tus datos</label>
+                            <label>4. Tus datos</label>
                             <br>
                             <input type="text" id="nombreCliente" required placeholder="Nombre completo">
+                            <small id="errorNombre"></small>
                             <br>
-                            <input 
-    type="text" 
-    id="telefonoCliente" 
-    placeholder="Teléfono" 
-    maxlength="8" 
-    pattern="[0-9]{8}" 
-    required
->
+                            <input type="text" id="telefonoCliente" placeholder="Teléfono" maxlength="8"
+                                pattern="[0-9]{8}" required>
+                            <small id="errorTelefono"></small>
                             <br>
                             <input type="email" id="correoCliente" placeholder="Correo electrónico">
                             <br>
                             <textarea id="notaAdicional" name="notaAdicional" rows="4" cols="50"
                                 placeholder="¿Alguna nota adicional? (opcional)"></textarea>
                         </div>
+                        <div class="btn-group">
+                            <button type="submit" class="btn-Confirmar" id="btnConfirmarCita">
+                                Confirmar cita
+                            </button>
+                            <button class="btn-Limpiar" id="btnLimpiarForm">
+                                Limpiar
+                            </button>
+                        </div>
 
-                        <button type="submit" class="btn-Confirmar" id="btnConfirmarCita">
-                            Confirmar cita
-                        </button>
                         <br>
-                    <small class="mensaje-seguridad">
-    <img src="images/candado.png" alt="seguridad" class="icono-seguridad">
-    Tu información está protegida y solo será utilizada para tu cita
-</small>
+                        <small class="mensaje-seguridad">
+                            <img src="images/candado.png" alt="seguridad" class="icono-seguridad">
+                            Tu información está protegida y solo será utilizada para tu cita
+                        </small>
 
-<div id="resumenConfirmacion" class="appointment-summary"></div>
-<div id="listaCitasGuardadas" class="citas-guardadas"></div>
-</form>
+                        <div id="resumenConfirmacion" class="appointment-summary"></div>
+                        <div id="listaCitasGuardadas" class="citas-guardadas"></div>
+                    </form>
 
                     <div class="panel-derecho">
                         <aside class="resumen">
@@ -114,6 +123,11 @@
                                 <p>
                                     <strong>Servicio: </strong>
                                     <span id="resumenServicio">-</span>
+                                </p>
+
+                                <p>
+                                    <strong>Precio: </strong>
+                                    <span id="resumenPrecio">-</span>
                                 </p>
 
                                 <p>
@@ -147,7 +161,7 @@
                             <br>
                             <p class="info3">
                                 <img src="images/pago.png" alt="pago" class="icono-pago">
-                                Aceptamos efectivo, SINPE Móvil y tarjetas
+                                Aceptamos efectivo, SINPE Móvil y tarjetas.
                             </p>
                             <br>
                             <p class="info4">
@@ -184,7 +198,7 @@
             <small>&copy; 2026 Rose Glow. Todos los derechos reservados.</small>
         </p>
     </footer>
-<script src="js/agendar.js"></script>
+    <script src="js/agendar.js"></script>
 
 </body>
 
