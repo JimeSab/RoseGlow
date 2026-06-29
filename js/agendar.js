@@ -139,6 +139,8 @@ const listaCitasGuardadas =
 const btnLimpiarForm =
     document.getElementById("btnLimpiarForm");
 
+let idCitaEditando = null;
+
 function cargarServicios() {
     for (const servicio of servicios) {
         const option = document.createElement("option");
@@ -252,7 +254,7 @@ function confirmarCita(event) {
     resumenConfirmacion.classList.add("summary-success");
 
     resumenConfirmacion.innerHTML = `
-        <h3>Tu cita ha sido confirmada</h3>
+        <h3>${idCitaEditando === null ? "Tu cita ha sido confirmada" : "Tu cita ha sido actualizada"}</h3>
         <p><strong>Cliente:</strong> ${nombre}</p>
         <p><strong>Teléfono:</strong> ${telefono}</p>
         <p><strong>Correo:</strong> ${correo || "No indicado"}</p>
@@ -262,7 +264,16 @@ function confirmarCita(event) {
         <p><strong>Hora:</strong> ${hora}</p>
     `;
 
+    const esEdicion =
+        idCitaEditando !== null;
+
     crearCitaPersistente();
+
+    Swal.fire({
+        title: esEdicion ? "Cita actualizada!" : "Cita confirmada!",
+        text: esEdicion ? "Tu cita fue actualizada correctamente!" : "Tu cita fue confirmada correctamente!",
+        icon: "success"
+    });
 }
 
 function mostrarError(mensaje) {
@@ -335,6 +346,7 @@ function crearCitaPersistente() {
         id: crypto.randomUUID(),
         servicioId: servicio.id,
         servicioNombre: servicio.nombre,
+        precio: servicio.precio,
         fecha: fechaCita.value,
         hora: horaCita.value,
         nombre: nombreCliente.value.trim(),
@@ -347,32 +359,109 @@ function crearCitaPersistente() {
     const citas =
         obtenerCitas();
 
-    citas.push(nuevaCita);
+    if (idCitaEditando !== null) {
+        for (let i = 0; i < citas.length; i++) {
+            if (citas[i].id === idCitaEditando) {
+                nuevaCita.id =
+                    idCitaEditando;
+
+                citas[i] =
+                    nuevaCita;
+            }
+        }
+        idCitaEditando = null;
+    } else {
+        citas.push(nuevaCita);
+    }
 
     guardarCitas(citas);
 
     renderizarCitas();
+
+    formularioCita.reset();
+    actualizarResumen();
 }
 
 function eliminarCita(idCita) {
-    const confirmar =
-        confirm("¿Deseas eliminar esta cita?");
+    Swal.fire({
+        title: "¿Eliminar cita?",
+        text: "Esta accion no se puede deshacer",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, eliminar!",
+        cancelButtonText: "Cancelar"
+    }).then(function (resultado) {
+        if (!resultado.isConfirmed) {
+            return;
+        }
 
-    if (!confirmar) {
-        return;
-    }
+        const citas =
+            obtenerCitas();
 
+        const citasFiltradas =
+            citas.filter(function (cita) {
+                return cita.id !== idCita;
+            });
+
+        guardarCitas(citasFiltradas);
+
+        renderizarCitas();
+
+        Swal.fire({
+            title: "Eliminada!",
+            text: "La cita fue eliminada correctamente.",
+            icon: "success"
+        });
+
+        resumenConfirmacion.innerHTML = "";
+    });
+}
+
+function editarCita(idCita) {
     const citas =
         obtenerCitas();
 
-    const citasFiltradas =
-        citas.filter(function (cita) {
-            return cita.id !== idCita;
+    const cita =
+        citas.find(function (cita) {
+            return cita.id === idCita;
         });
 
-    guardarCitas(citasFiltradas);
+    servicioElegido.value =
+        cita.servicioId;
 
-    renderizarCitas();
+    fechaCita.value =
+        cita.fecha;
+
+    horaCita.value =
+        cita.hora;
+
+    nombreCliente.value =
+        cita.nombre;
+
+    telefonoCliente.value =
+        cita.telefono;
+
+    correoCliente.value =
+        cita.correo;
+
+    notaAdicional.value =
+        cita.nota;
+
+    idCitaEditando =
+        idCita;
+
+    actualizarResumen();
+
+    resumenConfirmacion.classList.remove("summary-error");
+    resumenConfirmacion.classList.add("summary-success");
+
+    Swal.fire({
+        title: "Modo edicion!",
+        text: "Realiza los cambios y presiona Confirmar cita!",
+        icon: "info"
+    });
 }
 
 function renderizarCitas() {
@@ -402,6 +491,7 @@ function renderizarCitas() {
                         <div class="cita-info">
                             <p><strong>Cliente:</strong> ${cita.nombre}</p>
                             <p><strong>Teléfono:</strong> ${cita.telefono}</p>
+                            <p><strong>Precio:</strong> ₡${cita.precio.toLocaleString()}</p>
                             <p><strong>Correo:</strong> ${cita.correo || "No indicado"}</p>
                             <p><strong>Fecha:</strong> ${cita.fecha}</p>
                             <p><strong>Hora:</strong> ${cita.hora}</p>
@@ -410,6 +500,9 @@ function renderizarCitas() {
                     </div>
 
                     <div class="cita-actions">
+                        <button type="button" class="btn-edit" onclick="editarCita('${cita.id}')">
+                            Editar
+                        </button>
                         <button type="button" class="btn-delete" onclick="eliminarCita('${cita.id}')">
                             Eliminar
                         </button>
@@ -458,29 +551,42 @@ fechaCita.min = fechaActual;
 btnLimpiarForm.addEventListener("click", function (e) {
     e.preventDefault();
 
-    const confirmar =
-        confirm("¿Deseas limpiar el formulario?");
 
-    if (!confirmar) {
-        return;
-    }
+    Swal.fire({
+        title: "¿Limpiar formulario?",
+        text: "Se perderan los datos ingresados!",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, limpiar!",
+        cancelButtonText: "Cancelar"
+    }).then(function (resultado) {
+        if (!resultado.isConfirmed) {
+            return;
+        }
 
-    // Limpia formulario 
-    formularioCita.reset();
+        // Limpia formulario 
+        formularioCita.reset();
 
-    // Reset select
-    servicioElegido.value = "";
+        // Reset select
+        servicioElegido.value = "";
 
-    // Limpiar resumen visual
-    mensajeResumen.textContent = "Aún no has seleccionado ningún servicio";
+        // Limpiar resumen visual
+        mensajeResumen.textContent = "Aún no has seleccionado ningún servicio";
 
-    resumenServicio.textContent = "-";
-    resumenPrecio.textContent = "-";
-    resumenFecha.textContent = "-";
-    resumenHora.textContent = "-";
-    resumenNombre.textContent = "-";
+        resumenServicio.textContent = "-";
+        resumenPrecio.textContent = "-";
+        resumenFecha.textContent = "-";
+        resumenHora.textContent = "-";
+        resumenNombre.textContent = "-";
 
-    resumenConfirmacion.innerHTML = "";
+        resumenConfirmacion.innerHTML = "";
+
+        Swal.fire({
+            title: "Formulario limpio!",
+            text: "Los datos fueron eliminados correctamente.",
+            icon: "success"
+        });
+    });
 })
-
-window.eliminarCita = eliminarCita;
