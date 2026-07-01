@@ -237,36 +237,7 @@ UX: NAVEGACIÓN ACTIVA
 UX: UBICACIÓN ACTUAL
 ========================= */
 
-/*  Breadcrumb muestra dónde está el usuario */
-.breadcrumb {
-    margin-top: 5px;
-    background-color: #FCF8F8;
-    padding: 12px 0;
-}
 
-/*  Distribución simple de ruta */
-.breadcrumb .container {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    font-size: 0.95rem;
-}
-
-/*  Separador visual sin agregar texto extra al HTML */
-.breadcrumb a::after {
-    content: "/";
-    margin-left: 8px;
-    color: black;
-}
-
-.breadcrumb a {
-    color: black;
-    font-weight: bold;
-}
-
-.breadcrumb span {
-    color: black;
-}
 
 /*======================
 Servicios

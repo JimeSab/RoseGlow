@@ -29,7 +29,7 @@
             <!-- Navegación principal -->
             <nav class="main-nav">
                 <ul>
-                    <li><a href="index.html" class="active-link">Inicio</a></li>
+                    <li><a href=#inicio class="active-link">Inicio</a></li>
                     <li><a href="#servicios">Servicios</a></li>
                     <li><a href="#contacto">Contacto</a></li>
                 </ul>
@@ -37,13 +37,7 @@
             <a href="agendar.html" class="btn-agendar">Agendar Cita</a>
         </div>
     </header>
-    <!-- Ubicacion actual -->
-    <nav class="breadcrumb" aria-label="Ubicación actual">
-        <div class="container">
-            <a href="index.html">Inicio</a>
-            <span>Inicio</span>
-        </div>
-    </nav>
+
     <!-- Contenido principal -->
     <main>
         <section id="inicio" class="hero">
@@ -117,6 +111,35 @@
     <script src="js/jsonLoader.js"></script>
     <script src="js/servicios.js"></script>
     <script src="js/hero.js"></script>
+    <script>
+        const sections = document.querySelectorAll("section, footer");
+        const navLinks = document.querySelectorAll(".main-nav a");
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            // Si el usuario llego al final de la pagina, marca Contacto
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 5) {
+                current = "contacto";
+            }
+
+            navLinks.forEach(link => {
+                link.classList.remove("active-link");
+
+                if (link.getAttribute("href") === `#${current}`) {
+                    link.classList.add("active-link");
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
